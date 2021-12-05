@@ -2,8 +2,8 @@ package Controllers;
 
 import Models.Manager;
 import Views.ManagerView;
+import GUI.Text;
 import Main.Application;
-import Main.Text;
 
 public class ManagerController {
     private Manager model;

@@ -25,8 +25,10 @@ public class DatabaseController {
         return conn;
     }
 
-    public void selectUser() {
-        String sql = "SELECT username, password FROM logins";
+    public String selectUserPassword(String usern) {
+        String sql = "SELECT username, password FROM logins WHERE username = ";
+        usern = "'" + usern + "'";
+        sql = sql + usern;
 
         try (Connection conn = this.connect();
             Statement stmt = conn.createStatement();
@@ -34,9 +36,32 @@ public class DatabaseController {
         {
             while (rs.next()) {
                 System.out.println(rs.getString("username") + " " + rs.getString("password"));
+                return rs.getString("password");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        return null;
+    }
+
+    public String selectUserType(String usern) {
+        String sql = "SELECT username, type FROM logins WHERE username = ";
+        usern = "'" + usern + "'";
+        sql = sql + usern;
+
+        try (Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql))
+        {
+            while (rs.next()) {
+                //System.out.println(rs.getString("username") + " " + rs.getString("password"));
+                return rs.getString("type");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
     }
 }

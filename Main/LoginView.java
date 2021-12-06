@@ -16,7 +16,6 @@ public class LoginView extends JPanel {
 
     public LoginView(Button b, TextField u, TextField p) {
         c = new ArrayList<Component>();
-        setSize(400, 400);
         setLayout(null);
 
         b.setLocationSize(100, 200, 95, 40);
@@ -27,7 +26,7 @@ public class LoginView extends JPanel {
         p.setLocationSize(100, 90, 70, 30);
         c.add(p);
         c.add(new Text("Password:", 20, 100, 200, 10));
-        
+
         viewLogin();
     }
    

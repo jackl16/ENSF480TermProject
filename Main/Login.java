@@ -1,10 +1,12 @@
 package Main;
 
 import Controllers.DatabaseController;
+import Controllers.ManagerController;
 import GUI.Button;
+import GUI.ButtonObserver;
 import GUI.TextField;
 
-public class Login implements Observer {
+public class Login implements ButtonObserver {
     Boolean loggedIn;
     private LoginView view;
     Button b;
@@ -27,14 +29,31 @@ public class Login implements Observer {
         Application.mainPanel.add(view, "login");
     }
 
-    public void update() {
+    public void reset() {
+        u.reset();
+        p.reset();
+    }
+
+    public void buttonPressed(String btn) {
         tryLogin();
     }
 
     public void tryLogin() {
-        db.selectUser();
-        loggedIn = true;
-        Application.cardLayout.show(Application.mainPanel, "manager");
+        String realPass = db.selectUserPassword(u.getText());
+        if (realPass.compareTo(p.getText()) == 0) {
+            loggedIn = true;
+            String type = db.selectUserType(u.getText());
+            System.out.println(type);
+
+            if (type.compareTo("manager") == 0) {
+                reset();
+                Application.cardLayout.show(Application.mainPanel, "manager");
+            }
+            else if (type.compareTo("landlord") == 0) {
+                reset();
+                Application.cardLayout.show(Application.mainPanel, "landlord");
+            }
+        }
     }
 
     public Boolean loggedIn() {
@@ -42,7 +61,7 @@ public class Login implements Observer {
     }
 
     public void updateView() {
-        
+
         Application.cardLayout.show(Application.mainPanel, "login");
     }
 }

@@ -32,6 +32,11 @@ public class TextField implements Component {
         return tf.getText();
     }
 
+    public void reset() {
+        this.text = "";
+        this.tf.setText(this.text);
+    }
+
     public void draw(JPanel p)
     {
         p.add(tf);

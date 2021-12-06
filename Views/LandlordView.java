@@ -1,26 +1,22 @@
 package Views;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.Dimension;
 import java.util.ArrayList;
-
+import javax.swing.JPanel;
 import GUI.Button;
 import GUI.Component;
-import GUI.Text;
-import Main.Application;
+import java.awt.Dimension;
 
-public class ManagerView extends JPanel {
+public class LandlordView extends JPanel {
     private ArrayList<Component> c;
 
-    public ManagerView(Button logout) {
+    public LandlordView(Button logout) {
         c = new ArrayList<Component>();
         setLayout(null);
 
         logout.setLocationSize(10, 10, 95, 40);
         c.add(logout);
-        //add(new JLabel("Manager"));
-        viewManager();
+
+        viewLandlord();
     }
 
     @Override
@@ -28,7 +24,7 @@ public class ManagerView extends JPanel {
         return new Dimension(400, 400);
     }
 
-    public void viewManager() {
+    public void viewLandlord() {
         for (int i = 0; i < c.size(); i++) {
             c.get(i).draw(this);
         }

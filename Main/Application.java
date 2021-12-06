@@ -1,21 +1,16 @@
 package Main;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
-import javax.swing.SwingUtilities;
 
+import Controllers.LandlordController;
 import Controllers.ManagerController;
-import GUI.Component;
-import GUI.Text;
 
-public class Application<E> extends JFrame {
+public class Application extends JFrame {
     private Login login;
-    private E controller;
+    private ManagerController mangcont;
+    private LandlordController landcont;
 
     public static CardLayout cardLayout;
     public static JPanel mainPanel;
@@ -25,6 +20,10 @@ public class Application<E> extends JFrame {
         mainPanel = new JPanel(cardLayout);
         login = new Login();
 
+        mangcont = new ManagerController();
+        landcont = new LandlordController();
+
+
         login.updateView();
 
         add(mainPanel);
@@ -33,14 +32,6 @@ public class Application<E> extends JFrame {
         setLocationRelativeTo(null);
         pack();
         setVisible(true);
-    }
-
-    public void setController(E controller) {
-        this.controller = controller;
-    }
-
-    public E getController() {
-        return controller;
     }
 
     public JPanel getJPanel() {
@@ -56,8 +47,6 @@ public class Application<E> extends JFrame {
     }
 
     public static void main(String[] args) {
-        Application<ManagerController> app = new Application<ManagerController>();
-        ManagerController temp = new ManagerController();
-        app.setController(temp);
+        Application app = new Application();
     }
 }

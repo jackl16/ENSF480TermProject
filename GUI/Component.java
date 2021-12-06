@@ -1,7 +1,7 @@
 package GUI;
 import java.awt.Graphics;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public interface Component {
-    public void draw(Graphics g, JFrame f);
+    public void draw(JPanel p);
 }

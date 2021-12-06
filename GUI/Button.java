@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import Main.Observer;
 
@@ -40,7 +41,11 @@ public class Button implements Component {
         b.setBounds(this.x, this.y, this.width, this.height);
     }
 
-    public void draw(Graphics g, JFrame f) {
-        f.add(b);
+    public JButton getButton() {
+        return b;
+    }
+
+    public void draw(JPanel p) {
+        p.add(b);
     }
 }

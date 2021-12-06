@@ -6,31 +6,33 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.CardLayout;
+import javax.swing.SwingUtilities;
 
 import Controllers.ManagerController;
 import GUI.Component;
 import GUI.Text;
 
-public class Application<E> extends JPanel {
-    public static ArrayList<Component> t;
-    private JFrame f;
+public class Application<E> extends JFrame {
     private Login login;
     private E controller;
 
-    public Application() {
-        f = new JFrame("Application");
-        t = new ArrayList<Component>();
-        Application.t.clear();
-        Application.t.add(new Text("YO APP", 60, 80));
-        login = new Login();
-    }
+    public static CardLayout cardLayout;
+    public static JPanel mainPanel;
 
-    public void paintComponent(Graphics g) {
-        int fontSize = 10;
-        g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
-        for (int i = 0; i < t.size(); i++) {
-                t.get(i).draw(g, f);
-        }
+    public Application() {
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+        login = new Login();
+
+        login.updateView();
+
+        add(mainPanel);
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        pack();
+        setVisible(true);
     }
 
     public void setController(E controller) {
@@ -41,8 +43,12 @@ public class Application<E> extends JPanel {
         return controller;
     }
 
-    public JFrame getJFrame() {
-        return f;
+    public JPanel getJPanel() {
+        return mainPanel;
+    }
+
+    public CardLayout getCardLayout() {
+        return cardLayout;
     }
 
     public Login getLogin() {
@@ -53,13 +59,5 @@ public class Application<E> extends JPanel {
         Application<ManagerController> app = new Application<ManagerController>();
         ManagerController temp = new ManagerController();
         app.setController(temp);
-
-        app.getJFrame().getContentPane().add(app);
-        app.getJFrame().setSize(400, 400);
-        app.getJFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        app.getJFrame().setLocationRelativeTo(null);
-        app.getJFrame().setVisible(true);
-        
-        app.getLogin().updateView();
     }
 }

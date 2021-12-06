@@ -3,9 +3,9 @@ package Main;
 import Controllers.DatabaseController;
 import GUI.Button;
 import GUI.TextField;
-import Controllers.DatabaseController;
 
 public class Login implements Observer {
+    Boolean loggedIn;
     private LoginView view;
     Button b;
     TextField u;
@@ -13,7 +13,6 @@ public class Login implements Observer {
     DatabaseController db;
 
     public Login() {
-        view = new LoginView();
         db = new DatabaseController();
 
         b = new Button(this, "Login");
@@ -21,6 +20,11 @@ public class Login implements Observer {
 
         u = new TextField("");
         p = new TextField("");
+
+        view = new LoginView(b, u, p);
+        loggedIn = false;
+
+        Application.mainPanel.add(view, "login");
     }
 
     public void update() {
@@ -29,9 +33,16 @@ public class Login implements Observer {
 
     public void tryLogin() {
         db.selectUser();
+        loggedIn = true;
+        Application.cardLayout.show(Application.mainPanel, "manager");
+    }
+
+    public Boolean loggedIn() {
+        return loggedIn;
     }
 
     public void updateView() {
-        view.viewLogin(this.b, this.u, this.p);
+        
+        Application.cardLayout.show(Application.mainPanel, "login");
     }
 }

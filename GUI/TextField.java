@@ -1,8 +1,7 @@
 package GUI;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
 
-import java.awt.Graphics;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class TextField implements Component {
     int x;
@@ -25,12 +24,16 @@ public class TextField implements Component {
         tf.setBounds(this.x, this.y, this.width, this.height);
     }
 
+    public JTextField getTextField() {
+        return tf;
+    }
+
     public String getText() {
         return tf.getText();
     }
 
-    public void draw(Graphics g, JFrame f)
+    public void draw(JPanel p)
     {
-        f.add(tf);
+        p.add(tf);
     }
 }

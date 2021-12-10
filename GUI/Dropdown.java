@@ -1,11 +1,10 @@
 package GUI;
-import javax.swing.JLabel;
+
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
-
 import java.awt.GridBagConstraints;  
-import java.awt.Graphics;
 
-public class Text implements Component {
+public class Dropdown implements Component {
     String label;
 
     int x;
@@ -13,41 +12,48 @@ public class Text implements Component {
     int gridwidth;
     int width;
     int height;
-    String text;
-    JLabel l;
 
-    public Text(String label, String text, int x, int y, int gridwidth, int width, int height) {
+    JComboBox<String> cb;
+    String[] choices;
+
+    public Dropdown(String label, String[] c, int x, int y, int gridwidth, int width, int height) {
         this.label = label;
-        this.text = text;
+        this.choices = c;
+        cb = new JComboBox<String>(this.choices);
+
         this.x = x;
         this.y = y;
         this.gridwidth = gridwidth;
         this.width = width;
         this.height = height;
-        l = new JLabel(text);
-        l.setBounds(this.x, this.y, this.width, this.height);
+        cb.setBounds(this.x, this.y, this.width, this.height);
+    }
+    
+    public String getText() {
+        return (String)cb.getSelectedItem();
     }
 
-    public void setText(String t) {
-        this.text = t;
-        this.l.setText(this.text);
+    public Boolean getBool() {
+        if (cb.getSelectedItem().toString().compareTo("true") == 0) {
+            return true;
+        }
+        else if (cb.getSelectedItem().toString().compareTo("false") == 0) {
+            return false;
+        }
+
+        return false;
     }
 
     public String getLabel() {
         return this.label;
     }
 
-    public int getX() {
-        return this.x;
+    public void reset() {
+        this.cb.setSelectedIndex(0);
     }
 
-    public int getY() {
-        return this.y;
-    }
-
-    public void draw(JPanel p)
-    {
-        p.add(l);
+    public void draw(JPanel p) {
+        p.add(cb);
     }
 
     public void draw(JPanel p, GridBagConstraints gbc) {
@@ -61,10 +67,9 @@ public class Text implements Component {
                 gbc.anchor = GridBagConstraints.LINE_START;
             }
         }
-
         gbc.gridwidth = this.gridwidth;
         gbc.gridx = this.x;
         gbc.gridy = this.y;
-        p.add(l, gbc);
+        p.add(cb, gbc);
     }
 }

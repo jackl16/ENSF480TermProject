@@ -1,22 +1,22 @@
 package GUI;
-import javax.swing.JLabel;
+
+import javax.swing.JTextArea;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.GridBagConstraints;
+import java.awt.Dimension;
 
-import java.awt.GridBagConstraints;  
-import java.awt.Graphics;
-
-public class Text implements Component {
+public class TextArea implements Component {
     String label;
-
     int x;
     int y;
     int gridwidth;
     int width;
     int height;
     String text;
-    JLabel l;
+    JTextArea ta;
 
-    public Text(String label, String text, int x, int y, int gridwidth, int width, int height) {
+    public TextArea(String label, String text, int x, int y, int gridwidth, int width, int height) {
         this.label = label;
         this.text = text;
         this.x = x;
@@ -24,30 +24,18 @@ public class Text implements Component {
         this.gridwidth = gridwidth;
         this.width = width;
         this.height = height;
-        l = new JLabel(text);
-        l.setBounds(this.x, this.y, this.width, this.height);
+
+        ta = new JTextArea(this.text);
+        ta.setBounds(this.x, this.y, this.width, this.height);
+        ta.setPreferredSize(new Dimension(this.width, this.height));
     }
 
-    public void setText(String t) {
-        this.text = t;
-        this.l.setText(this.text);
+    public String getText() {
+        return this.ta.getText();
     }
 
     public String getLabel() {
         return this.label;
-    }
-
-    public int getX() {
-        return this.x;
-    }
-
-    public int getY() {
-        return this.y;
-    }
-
-    public void draw(JPanel p)
-    {
-        p.add(l);
     }
 
     public void draw(JPanel p, GridBagConstraints gbc) {
@@ -63,8 +51,9 @@ public class Text implements Component {
         }
 
         gbc.gridwidth = this.gridwidth;
+
         gbc.gridx = this.x;
         gbc.gridy = this.y;
-        p.add(l, gbc);
+        p.add(ta, gbc);
     }
 }

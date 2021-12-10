@@ -1,6 +1,8 @@
 package Models;
 
+import java.util.ArrayList;
+
 public abstract class User {
-    Property properties[];
+    ArrayList<Property> properties;
     String username;
 }

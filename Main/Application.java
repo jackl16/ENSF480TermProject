@@ -55,11 +55,6 @@ public class Application extends JFrame {
         return login;
     }
 
-    public static ManagerController getManagerController() {
-        return mangcont;
-    }
-
-
     public static LandlordController getLandlordController() {
         return landcont;
     }
